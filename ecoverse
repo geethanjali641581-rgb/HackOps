@@ -1,0 +1,125 @@
+None selected 
+
+Skip to content
+Using Gmail with screen readers
+Enable desktop notifications for Gmail.
+   OK  No thanks
+Conversations
+Get started with Gmail
+Customize your inbox
+Change profile image
+Import contacts and mail
+Get Gmail for mobile
+0% of 15 GB used
+Terms · Privacy · Program Policies
+Last account activity: 0 minutes ago
+Open in 1 other location · Details
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Echoverse - AI Audiobook Creation Tool</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: Arial, sans-serif; background: #181c24; color: #f5f6fa; margin: 0; }
+        header { background: #232946; padding: 2rem 1rem; text-align: center; }
+        h1 { margin: 0; font-size: 2.5rem; }
+        main { max-width: 600px; margin: 2rem auto; background: #232946; border-radius: 10px; padding: 2rem; box-shadow: 0 2px 8px #0003; }
+        label { display: block; margin-top: 1.5rem; font-weight: bold; }
+        /* Enhanced background with gradient and subtle pattern */
+        body {
+            background: linear-gradient(135deg, #181c24 0%, #232946 100%);
+            color: #f5f6fa;
+            margin: 0;
+            min-height: 100vh;
+            position: relative;
+            /* Optional: add a subtle pattern overlay */
+            /* background-image: url('data:image/svg+xml;utf8,<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" fill="none"/><circle cx="20" cy="20" r="1" fill="%233a3f58" /></svg>'); */
+            /* background-repeat: repeat; */
+        }
+        .download-link {
+            display: inline-block;
+            margin-top: 1.5rem;
+            background: #eebbc3;
+            color: #232946;
+            padding: 0.75rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .download-link:disabled, .download-link[aria-disabled="true"] {
+            background: #888;
+            color: #ccc;
+            pointer-events: none;
+        }
+        textarea, input[type="file"] { width: 100%; margin-top: 0.5rem; padding: 0.75rem; border-radius: 5px; border: none; font-size: 1rem; }
+        button { margin-top: 2rem; padding: 0.75rem 2rem; background: #eebbc3; color: #232946; border: none; border-radius: 5px; font-size: 1.1rem; cursor: pointer; }
+        button:disabled { background: #888; cursor: not-allowed; }
+        .audio-preview { margin-top: 2rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Echoverse</h1>
+        <p>AI Powered Audiobook Creation Tool</p>
+    </header>
+    <main>
+        <form id="audiobookForm">
+            <label for="bookText">Paste Book Text or Upload File</label>
+            <textarea id="bookText" rows="8" placeholder="Paste your book text here..."></textarea>
+            <input type="file" id="fileInput" accept=".txt,.docx,.pdf">
+            <label for="voiceSelect">Select Voice</label>
+            <select id="voiceSelect">
+                <option value="en-US-JennyNeural">Jenny (English, US)</option>
+                <option value="en-US-GuyNeural">Guy (English, US)</option>
+                <option value="en-GB-RyanNeural">Ryan (English, UK)</option>
+                <option value="en-IN-NeerjaNeural">Neerja (English, India)</option>
+            </select>
+            <button type="submit" id="generateBtn">Generate Audiobook</button>
+        </form>
+        <div class="audio-preview" id="audioPreview"></div>
+    </main>
+    <script>
+        // Handle file upload and read as text
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                document.getElementById('bookText').value = evt.target.result;
+            };
+            reader.readAsText(file);
+        });
+
+        // Simulate AI audiobook generation (replace with real API integration)
+        document.getElementById('audiobookForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const text = document.getElementById('bookText').value.trim();
+            const voice = document.getElementById('voiceSelect').value;
+            const audioPreview = document.getElementById('audioPreview');
+            audioPreview.innerHTML = '';
+
+            if (!text) {
+                alert('Please provide book text or upload a file.');
+                return;
+            }
+
+            document.getElementById('generateBtn').disabled = true;
+            audioPreview.innerHTML = '<p>Generating audiobook with AI...</p>';
+
+            // --- Replace this block with real API call to your AI TTS backend ---
+            // For demo, use browser SpeechSynthesis to simulate
+            const synth = window.speechSynthesis;
+            const utter = new SpeechSynthesisUtterance(text.slice(0, 500)); // Limit preview
+            utter.voice = synth.getVoices().find(v => v.name.includes(voice.split('-')[2]));
+            synth.speak(utter);
+            audioPreview.innerHTML = '<p><em>Preview playing using browser TTS (AI integration needed for real audio output).</em></p>';
+            // ---------------------------------------------------------------
+
+            document.getElementById('generateBtn').disabled = false;
+        });
+    </script>
+</body>
+</html>
+echoverse.html
+Displaying echoverse.html.
